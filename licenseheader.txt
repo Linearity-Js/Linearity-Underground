@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Linearity
+<#if licenseLast??>
+${licenseLast}
+</#if>
