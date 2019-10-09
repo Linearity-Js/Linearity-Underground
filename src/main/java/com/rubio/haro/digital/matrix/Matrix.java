@@ -26,6 +26,10 @@ public class Matrix {
     public void setValue(int row, int col, Double value) {
         this.matrix[row][col] = value;
     }
+    
+    public Double getValue(int row, int col) {
+        return this.matrix[row][col];
+    }
 
     public Double[][] getMatrix() {
         return matrix;
