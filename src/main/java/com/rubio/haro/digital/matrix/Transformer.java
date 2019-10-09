@@ -14,6 +14,7 @@ public class Transformer {
     resultset r;
 
     public resultset getGaussMatrix(Matrix m) {
+        System.out.println("Starting Gauss...");
         r = new resultset();
         int col = 1;
 
@@ -30,15 +31,22 @@ public class Transformer {
                 }
                 r.setMatrix(m);
             } else {
+                System.out.println("Error index");
                 r.addError("array index out of bounds");
             }
         } catch (Exception e) {
+            System.out.println("Other error:" + e.getMessage());
             r.addError(e.getMessage());
         }
 
         return r;
     }
 
+    /**
+     * Transform matrix into Gauss-Jordan matrix. Author: rodrigo_rubio
+     * @param m you just send the matrix! this use the Gauss Method 2 times
+     * @return we return a resultset Object. This have a error-message and the result atributes.
+     */
     public resultset getGaussJordanMatrix(Matrix m) {
         r = new resultset();
         int col = 1;
@@ -50,6 +58,7 @@ public class Transformer {
             r = new resultset();
             try {
                 if (gaussMatrix.getRows() != 0) {
+                    System.out.println("Starting Gauss-Jordan...");
                     for (int i = (gaussMatrix.getRows() - 2); i >= 0; i--) {
                         int cont = 0;
                         for (int j = (gaussMatrix.getCols() - 2); cont != col; j--) {
@@ -68,6 +77,7 @@ public class Transformer {
                     r.addError("array index out of bounds");
                 }
             } catch (Exception e) {
+                System.out.println(e);
                 r.addError(e.getMessage());
             }
 
@@ -75,11 +85,16 @@ public class Transformer {
 
         }
 
-        System.out.println("Starting Gauss-Jordan...");
+        
 
         return r;
     }
 
+    /**
+     * Make Zero for matrix. Author: anonymous
+     * @param pivot, mat, destinationRow
+     * @return Return a Double with the zeros changes.
+     */
     private Double[][] makeZeros(int pivot, int destinationRow, Matrix mat) {
         Double[] auxiliarRow1 = new Double[mat.getCols()];
         Double[] auxiliarRow2 = new Double[mat.getCols()];
