@@ -13,6 +13,35 @@ public class Transformer {
 
     resultset r;
 
+    public resultset getDeterminant(Matrix m) {
+        System.out.println("Starting Determinant...");
+        r = new resultset();
+        r = getGaussMatrix(m);
+        if (!r.hasError()) {
+            m.logMatrix();
+            m = r.getResult();
+            Double values[] = new Double[m.getRows()];
+            Double Determinant = 1.0;
+
+            if (m.getCols() == m.getRows()) {
+                System.out.println("Is a nxn matrix");
+                for (int i = 0; i < m.getRows(); i++) {
+                    values[i] = m.getValue(i, i);
+                    Determinant *= values[i];
+                    System.out.print(values[i]);
+                }
+                System.out.println(" ");
+                System.out.println("determinant:" + Determinant);
+                Double[][] det = new Double[1][1];
+                det[0][0] = Determinant;
+                r.setMatrix(new Matrix(det));
+            } else {
+                r.addError("We can't get the determinant with GaussJordan because is not nxn");
+            }
+        } 
+        return r;
+    }
+
     public resultset getGaussMatrix(Matrix m) {
         System.out.println("Starting Gauss...");
         r = new resultset();
@@ -44,8 +73,10 @@ public class Transformer {
 
     /**
      * Transform matrix into Gauss-Jordan matrix. Author: rodrigo_rubio
+     *
      * @param m you just send the matrix! this use the Gauss Method 2 times
-     * @return we return a resultset Object. This have a error-message and the result atributes.
+     * @return we return a resultset Object. This have a error-message and the
+     * result atributes.
      */
     public resultset getGaussJordanMatrix(Matrix m) {
         r = new resultset();
@@ -85,13 +116,12 @@ public class Transformer {
 
         }
 
-        
-
         return r;
     }
 
     /**
      * Make Zero for matrix. Author: anonymous
+     *
      * @param pivot, mat, destinationRow
      * @return Return a Double with the zeros changes.
      */
