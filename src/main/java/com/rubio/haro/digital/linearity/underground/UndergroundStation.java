@@ -151,6 +151,34 @@ public class UndergroundStation {
          */
     }
     
+    /**
+     *
+     * @param matrix
+     * @return Matrix
+     */
+    @POST
+    @Path("/getTransposeMatrix")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getTransposeMatrix(Matrix matrix) {
+        System.out.println("Starting getter");
+        try {
+            matrix.logMatrix();
+            Transformer t = new Transformer();
+            resultset r = t.getTransposeMatrix(matrix);
+            if (r.hasError()) {
+                System.out.println("murio:" + r.getMessage());
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(matrix).build();
+            } else {
+                //r.getResult().logMatrix();
+                return Response.status(Response.Status.CREATED).entity(r.getResult()).build();
+            }
+
+        } catch (Exception e) {
+            System.out.println("error:" + e.getMessage());
+            return Response.status(Response.Status.UNAUTHORIZED).entity(matrix).build();
+        }
+    }
     
     /**
      *

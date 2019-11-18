@@ -38,7 +38,7 @@ public class Transformer {
             } else {
                 r.addError("We can't get the determinant with GaussJordan because is not nxn");
             }
-        } 
+        }
         return r;
     }
 
@@ -114,6 +114,36 @@ public class Transformer {
 
         } else {
 
+        }
+
+        return r;
+    }
+
+    public resultset getTransposeMatrix(Matrix mat) {
+        r = new resultset();
+        System.out.println("starting transpose matrix..");
+
+        try {
+            int rows = mat.getRows();
+            int cols = mat.getRows();
+
+            Matrix d = new Matrix(new Double[rows][cols]);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    d.setValue(j, i, mat.getValue(i, j));
+                    System.out.println("t[" + j + "][" + i + "] = m [" + i + "][" + j + "]");
+                    System.out.println(d.getValue(j, i) + " = " + d.getValue(i, j));
+                }
+            }
+            System.out.println("--------------");
+            d.logMatrix();
+            System.out.println("--------------");
+            mat.logMatrix();
+            r.setMatrix(d);
+        } catch (Exception e) {
+            System.out.println(e);
+            r.addError(e.getMessage());
         }
 
         return r;

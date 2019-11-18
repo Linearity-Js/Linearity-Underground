@@ -3,9 +3,6 @@
  */
 package com.rubio.haro.digital.matrix;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author rodrigo_rubio
@@ -68,8 +65,8 @@ public class test {
         g.logMatrix();
 
         Transformer t =  new Transformer();
-        t.getDeterminant(g);
-        
+        ///t.getGaussJordanMatrix(g).getResult().logMatrix();
+        t.getTransposeMatrix(g);
         /* try {
                 Solver s = new Solver();
                 double[] sol;
