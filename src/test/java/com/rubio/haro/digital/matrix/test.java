@@ -48,25 +48,27 @@ public class test {
         
          */
         g.setValue(0, 0, 2.0);
-        g.setValue(0, 1, -3.0);
+        g.setValue(0, 1, 1.0);
         g.setValue(0, 2, 0.0);
         //g.setValue(0, 3, 8.0);
 
-        g.setValue(1, 0, 4.0);
-        g.setValue(1, 1, -5.0);
+        g.setValue(1, 0, 1.0);
+        g.setValue(1, 1, 1.0);
         g.setValue(1, 2, 1.0);
         //g.setValue(1, 3, 15.0);
 
-        g.setValue(2, 0, 2.0);
+        g.setValue(2, 0, 0.0);
         g.setValue(2, 1, 0.0);
-        g.setValue(2, 2, 4.0);
+        g.setValue(2, 2, 1.0);
         //g.setValue(2, 3, 1.0);
 
         g.logMatrix();
 
         Transformer t =  new Transformer();
-        ///t.getGaussJordanMatrix(g).getResult().logMatrix();
-        t.getTransposeMatrix(g);
+        Matrix s = new Matrix();
+        t.getInverse(g);
+        
+        //t.getTransposeMatrix(g);
         /* try {
                 Solver s = new Solver();
                 double[] sol;
